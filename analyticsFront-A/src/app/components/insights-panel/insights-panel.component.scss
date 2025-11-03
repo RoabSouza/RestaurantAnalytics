@@ -1,0 +1,264 @@
+.insights-panel {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 20px;
+
+    .insights-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+
+        h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+        }
+
+        .btn-loading {
+            padding: 5px 10px;
+            background: #f3f4f6;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+    }
+}
+
+.loading-insights {
+    text-align: center;
+    padding: 40px 20px;
+    color: #6b7280;
+
+    .spinner {
+        width: 30px;
+        height: 30px;
+        border: 3px solid #f3f4f6;
+        border-top: 3px solid #667eea;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 15px;
+    }
+}
+
+.insights-content {
+    .periodo-info {
+        margin-bottom: 15px;
+        padding: 8px 12px;
+        background: #f8fafc;
+        border-radius: 6px;
+        font-size: 0.8rem;
+        color: #64748b;
+        text-align: center;
+    }
+}
+
+// Container principal dos insights
+.insights-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    // Estado normal (até 3 insights)
+    max-height: none;
+    overflow-y: visible;
+
+    // Estado com scroll (mais de 3 insights)
+    &.scrollable {
+        max-height: 400px; // Altura máxima antes do scroll
+        overflow-y: auto;
+        padding-right: 8px; // Espaço para a barra de scroll
+
+        // Estilização da barra de scroll
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 3px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+
+            &:hover {
+                background: #94a3b8;
+            }
+        }
+    }
+}
+
+.insight-item {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 0; // Remove margin-bottom pois agora usamos gap
+    border-left: 4px solid;
+    transition: transform 0.2s ease;
+    flex-shrink: 0; // Impede que os itens encolham
+
+    &:hover {
+        transform: translateX(5px);
+    }
+
+    .insight-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 8px;
+
+        .insight-icon {
+            font-size: 1.1rem;
+        }
+
+        .insight-title {
+            flex: 1;
+            font-size: 0.95rem;
+        }
+
+        .insight-priority {
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+
+            &.priority-alta {
+                background: #fee2e2;
+                color: #dc2626;
+            }
+
+            &.priority-media {
+                background: #fef3c7;
+                color: #d97706;
+            }
+
+            &.priority-baixa {
+                background: #d1fae5;
+                color: #059669;
+            }
+        }
+    }
+
+    .insight-description {
+        margin: 0 0 8px 0;
+        color: #4b5563;
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+
+    .insight-variacao {
+        text-align: right;
+
+        .positive {
+            color: #059669;
+            font-weight: bold;
+        }
+
+        .negative {
+            color: #dc2626;
+            font-weight: bold;
+        }
+    }
+}
+
+// Indicador de scroll (aparece apenas quando há muitos insights)
+.scroll-indicator {
+    text-align: center;
+    padding: 10px;
+    margin-top: 10px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    animation: pulse 2s infinite;
+
+    span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+}
+
+// Cores por tipo de insight
+.insight-sucesso {
+    background: #f0fdf4;
+    border-left-color: #10b981;
+}
+
+.insight-alerta {
+    background: #fef2f2;
+    border-left-color: #ef4444;
+}
+
+.insight-info {
+    background: #eff6ff;
+    border-left-color: #3b82f6;
+}
+
+.insight-destaque {
+    background: #fefce8;
+    border-left-color: #eab308;
+}
+
+.no-insights,
+.error-insights {
+    text-align: center;
+    padding: 30px 20px;
+    color: #9ca3af;
+}
+
+.error-insights {
+    color: #dc2626;
+    background: #fef2f2;
+    border-radius: 8px;
+}
+
+// Animações
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
+// Responsividade
+@media (max-width: 768px) {
+    .insights-panel {
+        padding: 15px;
+    }
+
+    .insights-container.scrollable {
+        max-height: 350px; // Altura menor em mobile
+    }
+
+    .insight-item {
+        padding: 12px;
+
+        .insight-header {
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+    }
+}

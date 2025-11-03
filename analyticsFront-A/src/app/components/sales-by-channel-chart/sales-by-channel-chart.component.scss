@@ -1,0 +1,191 @@
+.chart-container {
+  background: rgba(255, 255, 255, 0.808);
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  // Título do gráfico
+  .chart-title {
+    margin: 0 0 20px 0;
+    font-size: 1.5rem;
+    color: #2d3748;
+    text-align: center;
+  }
+
+  // Área onde o gráfico é renderizado
+  .chart-wrapper {
+    position: relative;
+    height: 400px;
+
+    canvas {
+      max-height: 100%;
+    }
+  }
+
+  // Mensagem quando não há dados
+  .no-data {
+    text-align: center;
+    padding: 60px 20px;
+    color: #9ca3af;
+    font-size: 1.2rem;
+  }
+}
+
+
+// Container principal das tabelas
+.tables-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 20px;
+}
+
+// Cartão individual de cada tabela
+.table-card {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  // Título da tabela
+  .table-title {
+    margin: 0 0 20px 0;
+    font-size: 1.3rem;
+    color: #2d3748;
+    text-align: center;
+  }
+
+  // Wrapper para scroll horizontal se necessário
+  .table-wrapper {
+    overflow-x: auto;
+  }
+
+  // Estilos da tabela de ranking
+  .ranking-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    // Cabeçalho da tabela
+    thead {
+      tr {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+
+        th {
+          padding: 12px;
+          text-align: left;
+          font-weight: 600;
+          font-size: 0.9rem;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+
+          // Primeira coluna (posição/ranking)
+          &:first-child {
+            border-top-left-radius: 8px;
+            text-align: center;
+            width: 60px;
+          }
+
+          // Última coluna
+          &:last-child {
+            border-top-right-radius: 8px;
+          }
+        }
+      }
+    }
+
+    // Corpo da tabela
+    tbody {
+      tr {
+        border-bottom: 1px solid #e5e5e5;
+        transition: background-color 0.2s ease;
+
+        // Efeito hover nas linhas
+        &:hover {
+          background-color: #f9f9f9;
+        }
+
+        // Destaques para as primeiras posições
+        &.gold {
+          background-color: #fef3c7 !important; // Ouro
+        }
+
+        &.silver {
+          background-color: #f3f4f6 !important; // Prata
+        }
+
+        &.bronze {
+          background-color: #fed7aa !important; // Bronze
+        }
+
+        // Estilos das células
+        td {
+          padding: 12px;
+          font-size: 0.95rem;
+
+          // Coluna da posição/ranking
+          &.rank {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+          }
+
+          // Coluna do nome
+          &.name {
+            font-weight: 600;
+            color: #1f2937;
+          }
+
+          // Coluna da localização (apenas para lojas)
+          &.location {
+            color: #6b7280;
+            font-size: 0.85rem;
+          }
+
+          // Coluna de quantidade (verde)
+          &.quantity {
+            color: #059669;
+            font-weight: 600;
+          }
+
+          // Coluna de valor monetário (azul)
+          &.value {
+            color: #2563eb;
+            font-weight: 700;
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+
+  // Mensagem quando não há dados
+  .no-data {
+    text-align: center;
+    padding: 40px 20px;
+    color: #9ca3af;
+    font-size: 1rem;
+  }
+}
+
+// Responsividade para tablets e mobile
+@media (max-width: 768px) {
+  .tables-container {
+    grid-template-columns: 1fr; // Uma coluna em telas menores
+  }
+
+  .table-card {
+    .ranking-table {
+      font-size: 0.85rem; // Texto menor em mobile
+
+      thead th,
+      tbody td {
+        padding: 8px 4px; // Padding reduzido
+      }
+
+      // Esconde a coluna de localização em mobile
+      .location {
+        display: none;
+      }
+    }
+  }
+}

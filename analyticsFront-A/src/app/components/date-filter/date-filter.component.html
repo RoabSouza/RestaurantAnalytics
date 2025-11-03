@@ -1,0 +1,39 @@
+<!-- Componente de filtro por período -->
+<div class="filter-container">
+
+  <h3 class="filter-title">🔍 Filtrar Período</h3>
+
+  <!-- Botões de atalho para períodos comuns -->
+  <div class="quick-filters">
+    <button class="btn-quick" (click)="aplicarPeriodo(7)">
+      Últimos 7 dias
+    </button>
+    <button class="btn-quick" (click)="aplicarPeriodo(30)">
+      Últimos 30 dias
+    </button>
+    <button class="btn-quick" (click)="aplicarPeriodo(90)">
+      Últimos 90 dias
+    </button>
+  </div>
+
+  <!-- Inputs para seleção manual de datas -->
+  <div class="date-inputs">
+
+    <div class="input-group">
+      <label for="dataInicio">Data Início:</label>
+      <input type="date" id="dataInicio" [(ngModel)]="dataInicio" class="date-input">
+    </div>
+
+    <div class="input-group">
+      <label for="dataFim">Data Fim:</label>
+      <input type="date" id="dataFim" [(ngModel)]="dataFim" class="date-input">
+    </div>
+
+  </div>
+
+  <!-- Botão para aplicar o filtro -->
+  <button class="btn-apply" (click)="aplicarFiltro()">
+    Aplicar Filtro
+  </button>
+
+</div>

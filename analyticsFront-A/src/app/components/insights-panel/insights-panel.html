@@ -1,0 +1,56 @@
+<div class="insights-panel">
+    <div class="insights-header">
+      <h3>📊 Análise Comparativa</h3>
+      <button *ngIf="carregando" class="btn-loading" disabled>
+        ⏳ Analisando...
+      </button>
+    </div>
+  
+    <div *ngIf="carregando" class="loading-insights">
+      <div class="spinner"></div>
+      <p>Comparando períodos...</p>
+    </div>
+  
+    <div *ngIf="!carregando && resultado" class="insights-content">
+      <div class="periodo-info">
+        <small>Comparando com período anterior equivalente</small>
+      </div>
+  
+      <!-- Container com scroll condicional -->
+      <div class="insights-container" [class.scrollable]="resultado.insights.length > 3">
+        <div *ngFor="let insight of resultado.insights" 
+             class="insight-item" 
+             [class]="'insight-' + insight.tipo">
+          
+          <div class="insight-header">
+            <span class="insight-icon">{{ insight.icone }}</span>
+            <strong class="insight-title">{{ insight.titulo }}</strong>
+            <span class="insight-priority" [class]="'priority-' + insight.prioridade">
+              {{ insight.prioridade }}
+            </span>
+          </div>
+          
+          <p class="insight-description">{{ insight.descricao }}</p>
+          
+          <div *ngIf="insight.variacao !== undefined" class="insight-variacao">
+            <span [class]="insight.variacao > 0 ? 'positive' : 'negative'">
+              {{ insight.variacao > 0 ? '+' : '' }}{{ insight.variacao.toFixed(1) }}%
+            </span>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Indicador de scroll (aparece apenas quando há muitos insights) -->
+      <div *ngIf="resultado.insights.length > 3" class="scroll-indicator">
+        <span>⬇️ Role para ver mais insights</span>
+      </div>
+  
+      <div *ngIf="!resultado.insights.length" class="no-insights">
+        <p>📈 Aplique filtros para ver análises comparativas</p>
+      </div>
+    </div>
+  
+    <div *ngIf="erro" class="error-insights">
+      <p>⚠️ {{ erro }}</p>
+    </div>
+  </div>

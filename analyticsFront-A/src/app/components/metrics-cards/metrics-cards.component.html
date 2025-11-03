@@ -1,0 +1,43 @@
+<!-- Grid de cards com as métricas principais do dashboard -->
+<div class="metrics-grid">
+
+    <!-- Card de faturamento total -->
+    <div class="metric-card faturamento">
+        <div class="card-icon">💰</div>
+        <div class="card-content">
+            <h3 class="card-label">Faturamento Total</h3>
+            <p class="card-value">{{ formatarMoeda(data.faturamentoTotal) }}</p>
+        </div>
+    </div>
+
+    <!-- Card de total de vendas -->
+    <div class="metric-card vendas">
+        <div class="card-icon">🛒</div>
+        <div class="card-content">
+            <h3 class="card-label">Total de Vendas</h3>
+            <p class="card-value">{{ formatarNumero(data.totalVendas) }}</p>
+        </div>
+    </div>
+
+    <!-- Card de ticket médio -->
+    <div class="metric-card ticket">
+        <div class="card-icon">🎯</div>
+        <div class="card-content">
+            <h3 class="card-label">Ticket Médio</h3>
+            <p class="card-value">{{ formatarMoeda(data.ticketMedio) }}</p>
+        </div>
+    </div>
+
+    <!-- Card de crescimento (muda cor baseado no valor) -->
+    <div class="metric-card crescimento" [ngClass]="getClasseCrescimento()">
+        <div class="card-icon">{{ getIconeCrescimento() }}</div>
+        <div class="card-content">
+            <h3 class="card-label">Crescimento</h3>
+            <p class="card-value">
+                {{ data.crescimentoPercentual >= 0 ? '+' : '' }}{{ data.crescimentoPercentual.toFixed(2) }}%
+            </p>
+            <p class="card-subtitle">vs período anterior</p>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,82 @@
+<!-- Modal para exportar relatório em PDF -->
+<div class="modal-overlay" *ngIf="isOpen" (click)="close()">
+  
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    
+    <!-- Cabeçalho do modal -->
+    <div class="modal-header">
+      <h2>📄 Exportar Relatório PDF</h2>
+      <button class="btn-close" (click)="close()">✕</button>
+    </div>
+    
+    <!-- Corpo do modal -->
+    <div class="modal-body">
+      
+      <p class="description">
+        Selecione o período que deseja incluir no relatório:
+      </p>
+      
+      <!-- Botões de atalho para períodos comuns -->
+      <div class="quick-filters">
+        <button class="btn-quick" (click)="aplicarPeriodo(7)">
+          Últimos 7 dias
+        </button>
+        <button class="btn-quick" (click)="aplicarPeriodo(30)">
+          Últimos 30 dias
+        </button>
+        <button class="btn-quick" (click)="aplicarPeriodo(90)">
+          Últimos 90 dias
+        </button>
+      </div>
+      
+      <!-- Inputs para seleção manual de datas -->
+      <div class="date-inputs">
+        <div class="input-group">
+          <label for="exportDataInicio">Data Início:</label>
+          <input 
+            type="date" 
+            id="exportDataInicio"
+            [(ngModel)]="dataInicio"
+            class="date-input">
+        </div>
+        
+        <div class="input-group">
+          <label for="exportDataFim">Data Fim:</label>
+          <input 
+            type="date" 
+            id="exportDataFim"
+            [(ngModel)]="dataFim"
+            class="date-input">
+        </div>
+      </div>
+      
+      <!-- Informações sobre o conteúdo do relatório -->
+      <div class="info-box">
+        <p>ℹ️ O relatório incluirá:</p>
+        <ul>
+          <li>Métricas principais</li>
+          <li>Top 10 produtos</li>
+          <li>Top 10 lojas</li>
+          <li>Vendas por canal</li>
+        </ul>
+      </div>
+      
+    </div>
+    
+    <!-- Rodapé do modal com ações -->
+    <div class="modal-footer">
+      <button class="btn-cancel" (click)="close()">
+        Cancelar
+      </button>
+      <button 
+        class="btn-export" 
+        (click)="exportar()"
+        [disabled]="exportando">
+        <span *ngIf="!exportando">📥 Exportar PDF</span>
+        <span *ngIf="exportando">⏳ Gerando...</span>
+      </button>
+    </div>
+    
+  </div>
+  
+</div>

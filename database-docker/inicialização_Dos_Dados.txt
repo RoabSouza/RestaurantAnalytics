@@ -1,0 +1,4 @@
+Para executar o codigo generate_data.py
+Fo instalada a dependendia "pip install psycopg2-binary faker"
+Foi executado o comando abaixo que possibilitou gerar os dados no banco que esta alocado no docker.
+C:\Spring STS\WorkSpace\RestaurantAnalytics\analytics\database-docker>python generate_data.py --db-url "postgresql://postgres:qwerty@localhost:5432/database_schema"

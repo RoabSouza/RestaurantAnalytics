@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  # PostgreSQL
+  postgres:
+    image: postgres:16
+    container_name: restaurant-postgres
+    environment:
+      POSTGRES_DB: database_schema
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: qwerty
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Adminer - Interface Web
+  adminer:
+    image: adminer
+    container_name: adminer-web
+    ports:
+      - "9090:8080"
+    networks:
+      - app-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:
+    driver: bridge

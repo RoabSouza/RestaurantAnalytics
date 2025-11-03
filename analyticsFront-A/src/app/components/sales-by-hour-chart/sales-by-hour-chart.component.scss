@@ -1,0 +1,42 @@
+// Container do gráfico de barras por hora
+.chart-container {
+    background: rgba(255, 255, 255, 0.808);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    // Título do gráfico
+    .chart-title {
+        margin: 0 0 20px 0;
+        font-size: 1.5rem;
+        color: #2d3748;
+        text-align: center;
+    }
+
+    // Área onde o gráfico é renderizado
+    .chart-wrapper {
+        position: relative;
+        height: 400px;
+
+        canvas {
+            max-height: 100%;
+        }
+    }
+
+    // Mensagem quando não há dados
+    .no-data {
+        text-align: center;
+        padding: 60px 20px;
+        color: #9ca3af;
+        font-size: 1.2rem;
+    }
+}
+
+// Ajustes para telas menores
+@media (max-width: 768px) {
+    .chart-container {
+        .chart-wrapper {
+            height: 300px; // Altura menor em mobile
+        }
+    }
+}

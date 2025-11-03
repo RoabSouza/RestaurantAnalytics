@@ -1,0 +1,116 @@
+// GRID DE CARDS DE MÉTRICAS
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+// ESTILO BASE DOS CARDS
+
+.metric-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 25px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  color: white;
+
+  // Efeito hover nos cards
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  // Ícone do card
+  .card-icon {
+    font-size: 3rem;
+    opacity: 0.9;
+  }
+
+  // Conteúdo do card (título e valor)
+  .card-content {
+    flex: 1;
+
+    .card-label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 0 0 8px 0;
+      opacity: 0.9;
+    }
+
+    .card-value {
+      font-size: 1.75rem;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .card-subtitle {
+      font-size: 0.75rem;
+      margin: 5px 0 0 0;
+      opacity: 0.8;
+    }
+  }
+}
+
+// CORES ESPECÍFICAS PARA CADA CARD
+
+// Card de faturamento
+.metric-card.faturamento {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+// Card de vendas
+.metric-card.vendas {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+// Card de ticket médio
+.metric-card.ticket {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+// Card de crescimento (muda cor baseado no valor)
+.metric-card.crescimento {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+
+  // Crescimento positivo (verde)
+  &.crescimento-positivo {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  }
+
+  // Crescimento negativo (vermelho)
+  &.crescimento-negativo {
+    background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+  }
+
+  // Crescimento neutro (cinza)
+  &.crescimento-neutro {
+    background: linear-gradient(135deg, #bdc3c7 0%, #2c3e50 100%);
+  }
+}
+
+// RESPONSIVIDADE
+
+@media (max-width: 768px) {
+  .metrics-grid {
+    grid-template-columns: 1fr; // Uma coluna em mobile
+  }
+
+  .metric-card {
+    .card-icon {
+      font-size: 2.5rem; // Ícone menor em mobile
+    }
+
+    .card-content {
+      .card-value {
+        font-size: 1.5rem; // Texto menor em mobile
+      }
+    }
+  }
+}

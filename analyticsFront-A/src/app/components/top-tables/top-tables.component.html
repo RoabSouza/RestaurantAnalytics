@@ -1,0 +1,77 @@
+<!-- Container principal das tabelas de ranking -->
+<div class="tables-container">
+  
+  <!-- Tabela dos produtos mais vendidos -->
+  <div class="table-card">
+    <h3 class="table-title">🍕 Top 10 Produtos</h3>
+    
+    <!-- Mostra a tabela se tiver dados -->
+    <div class="table-wrapper" *ngIf="topProdutos && topProdutos.length > 0">
+      <table class="ranking-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Loop pelos produtos, destacando as primeiras posições -->
+          <tr 
+            *ngFor="let produto of topProdutos; let i = index"
+            [ngClass]="getClassePosicao(i)">
+            <td class="rank">{{ getMedalha(i) }}</td>
+            <td class="name">{{ produto.nomeProduto }}</td>
+            <td class="quantity">{{ formatarNumero(produto.quantidadeVendida) }}</td>
+            <td class="value">{{ formatarMoeda(produto.totalVendido) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- Mensagem quando não há dados -->
+    <div class="no-data" *ngIf="!topProdutos || topProdutos.length === 0">
+      <p>📭 Nenhum produto encontrado</p>
+    </div>
+  </div>
+  
+  
+  <!-- Tabela das lojas com melhor performance -->
+  <div class="table-card">
+    <h3 class="table-title">🏪 Top 10 Lojas</h3>
+    
+    <!-- Mostra a tabela se tiver dados -->
+    <div class="table-wrapper" *ngIf="topLojas && topLojas.length > 0">
+      <table class="ranking-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Loja</th>
+            <th>Cidade</th>
+            <th>Vendas</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Loop pelas lojas, destacando as primeiras posições -->
+          <tr 
+            *ngFor="let loja of topLojas; let i = index"
+            [ngClass]="getClassePosicao(i)">
+            <td class="rank">{{ getMedalha(i) }}</td>
+            <td class="name">{{ loja.nomeLoja }}</td>
+            <td class="location">{{ loja.cidade }}/{{ loja.estado }}</td>
+            <td class="quantity">{{ formatarNumero(loja.quantidade) }}</td>
+            <td class="value">{{ formatarMoeda(loja.total) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- Mensagem quando não há dados -->
+    <div class="no-data" *ngIf="!topLojas || topLojas.length === 0">
+      <p>📭 Nenhuma loja encontrada</p>
+    </div>
+  </div>
+  
+</div>

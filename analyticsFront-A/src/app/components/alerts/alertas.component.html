@@ -1,0 +1,42 @@
+<!-- Sistema de Alertas Inteligentes -->
+<div class="alertas-container">
+    <div class="alertas-header">
+      <h3>🚨 Alertas do Sistema</h3>
+      <button class="btn-limpar" (click)="limparAlertas()" *ngIf="alertas.length > 0">
+        Limpar Todos
+      </button>
+    </div>
+  
+    <div class="alertas-list" *ngIf="alertas.length > 0; else semAlertas">
+      <div 
+        *ngFor="let alerta of alertas; let i = index" 
+        class="alerta-item"
+        [class]="'alerta-' + alerta.tipo"
+        [class.lido]="alerta.lido">
+        
+        <div class="alerta-icon">{{ alerta.icone }}</div>
+        
+        <div class="alerta-content">
+          <h4 class="alerta-titulo">{{ alerta.titulo }}</h4>
+          <p class="alerta-mensagem">{{ alerta.mensagem }}</p>
+          <small class="alerta-timestamp">
+            {{ alerta.timestamp | date:'dd/MM HH:mm' }}
+          </small>
+        </div>
+        
+        <button 
+          class="btn-fechar" 
+          (click)="marcarComoLido(i)"
+          *ngIf="!alerta.lido">
+          ✓
+        </button>
+      </div>
+    </div>
+  
+    <ng-template #semAlertas>
+      <div class="sem-alertas">
+        <p>🎉 Nenhum alerta no momento</p>
+        <small>Tudo sob controle!</small>
+      </div>
+    </ng-template>
+  </div>

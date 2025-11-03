@@ -1,0 +1,117 @@
+// Container do componente de filtro
+.filter-container {
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: var(--shadow-md);
+
+
+
+  // Título do filtro
+  .filter-title {
+    margin: 0;
+    font-size: 1.4rem;
+    color: var(--text-primary);
+    flex: 1;
+    margin-right: 100px;
+  }
+
+  // Botões de atalho para períodos rápidos
+  .quick-filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .btn-quick {
+      padding: 8px 16px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: white;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+      }
+    }
+  }
+
+  // Inputs de data
+  .date-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      label {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .date-input {
+        padding: 10px;
+        border: 2px solid #e5e7eb;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+
+        &:focus {
+          outline: none;
+          border-color: #667eea;
+        }
+      }
+    }
+  }
+
+  // Botão principal de aplicar filtro
+  .btn-apply {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+// RESPONSIVIDADE
+
+@media (max-width: 768px) {
+  .filter-container {
+    .date-inputs {
+      grid-template-columns: 1fr; // Uma coluna em mobile
+    }
+
+    .quick-filters {
+      flex-direction: column; // Botões empilhados
+
+      .btn-quick {
+        width: 100%; // Largura total
+      }
+    }
+  }
+}

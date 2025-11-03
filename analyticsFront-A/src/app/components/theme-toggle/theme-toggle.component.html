@@ -1,0 +1,13 @@
+<!-- Botão para alternar entre tema claro e escuro -->
+<button 
+  class="theme-toggle-btn"
+  (click)="toggle()"
+  [attr.aria-label]="(isDark$ | async) ? 'Ativar modo claro' : 'Ativar modo escuro'">
+  
+  <!-- Mostra ícone de lua quando está no tema claro -->
+  <span class="icon" *ngIf="!(isDark$ | async)">🌙</span>
+  
+  <!-- Mostra ícone de sol quando está no tema escuro -->
+  <span class="icon" *ngIf="isDark$ | async">☀️</span>
+  
+</button>

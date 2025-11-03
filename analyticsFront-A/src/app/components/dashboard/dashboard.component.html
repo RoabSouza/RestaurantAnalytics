@@ -1,0 +1,292 @@
+<!-- Template principal do dashboard COM DRAG & DROP -->
+<div class="dashboard-container">
+
+  <!-- Cabeçalho do dashboard -->
+  <header class="dashboard-header">
+    <div class="header-content">
+      <div class="logo-container">
+        <img src="../../../assets/abacate.png" alt="Abacate">
+        <h1>AvocaDash</h1>
+      </div>
+
+      <div class="header-actions">
+
+        <!-- Botões de teste (apenas desenvolvimento) 
+        <div class="test-buttons" *ngIf="!loading && !error">
+          <button class="btn-test" (click)="simularMudancaDeDados()" title="Testar reatividade dos gráficos">
+            🧪 Testar
+          </button>
+          <button class="btn-test" (click)="adicionarCanalAleatorio()" title="Adicionar canal aleatório">
+            ➕ Canal
+          </button>
+        </div>-->
+
+
+        <button class="btn-export-pdf" (click)="abrirModalExport()">
+          📄 Exportar PDF
+        </button>
+
+        <!-- Botão para alternar modo de edição -->
+        <button class="btn-edit-layout" (click)="toggleModoEdicao()" [class.active]="modoEdicao">
+          {{ modoEdicao ? '💾 Salvar Layout' : '✏️ Personalizar' }}
+        </button>
+
+        <button class="btn-refresh" (click)="recarregar()" [disabled]="loading">
+          🔄 Atualizar
+        </button>
+        <app-theme-toggle></app-theme-toggle>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mensagem do modo de edição -->
+  <div *ngIf="modoEdicao" class="edit-mode-banner">
+    <p>🎯 Modo de Personalização: Arraste os elementos para reorganizar o dashboard</p>
+  </div>
+
+  <!-- Seção de filtros por data -->
+  <section class="filters-section" *ngIf="!loading">
+    <app-date-filter (filtroAplicado)="aplicarFiltros($event)"></app-date-filter>
+  </section>
+
+  <!-- Estado de carregamento -->
+  <div *ngIf="loading" class="loading-container">
+    <div class="spinner"></div>
+    <p>Carregando dados...</p>
+  </div>
+
+  <!-- Estado de erro -->
+  <div *ngIf="error && !loading" class="error-container">
+    <div class="error-icon">⚠️</div>
+    <h2>Ops! Algo deu errado</h2>
+    <p>{{ error }}</p>
+    <button class="btn-retry" (click)="recarregar()">
+      Tentar Novamente
+    </button>
+  </div>
+
+  <!-- CONTEÚDO PRINCIPAL COM DRAG & DROP -->
+  <div *ngIf="dashboardData && !loading && !error" class="dashboard-content" cdkDropListGroup>
+
+    <!-- Container principal das seções arrastáveis -->
+    <div cdkDropList [cdkDropListData]="ordemSecoes" (cdkDropListDropped)="reordenarSecoes($event)"
+      class="sections-container">
+
+      <!-- Loop pelas seções na ordem definida -->
+      <section *ngFor="let secao of ordemSecoes" [cdkDragData]="secao" cdkDrag [cdkDragDisabled]="!modoEdicao"
+        class="dashboard-section">
+
+        <!-- Conteúdo da seção baseado no tipo -->
+        <ng-container [ngSwitch]="secao">
+
+          <!-- SEÇÃO: INSIGHTS COMPARATIVOS -->
+          <div *ngSwitchCase="'insights'" class="section-content">
+            <div class="section-header">
+              <div class="section-actions">
+                <div *ngIf="modoEdicao" class="drag-handle" cdkDragHandle>
+                  ⋮⋮
+                </div>
+                <button *ngIf="modoEdicao" class="btn-remove-section" (click)="removerSecao('insights')">
+                  🗑️
+                </button>
+              </div>
+            </div>
+            <app-insights-panel 
+              [dadosAtuais]="dashboardData"
+              [dataInicio]="dataInicio"
+              [dataFim]="dataFim">
+            </app-insights-panel>
+          </div>
+
+          <!-- SEÇÃO: MÉTRICAS PRINCIPAIS COM DRAG & DROP INTERNO -->
+          <div *ngSwitchCase="'metrics'" class="section-content">
+            <div class="section-header">
+              <h2>📊 Métricas Principais</h2>
+              <div class="section-actions">
+                <div *ngIf="modoEdicao" class="drag-handle" cdkDragHandle>
+                  ⋮⋮
+                </div>
+                <button *ngIf="modoEdicao" class="btn-remove-section" (click)="removerSecao('metrics')">
+                  🗑️
+                </button>
+              </div>
+            </div>
+
+            <!-- Grid de métricas arrastáveis -->
+            <div class="metrics-grid" cdkDropList [cdkDropListData]="ordemMetricas"
+              (cdkDropListDropped)="reordenarMetricas($event)">
+
+              <div *ngFor="let metrica of ordemMetricas" [cdkDragData]="metrica" cdkDrag [cdkDragDisabled]="!modoEdicao"
+                class="metric-card">
+
+                <div *ngIf="modoEdicao" class="metric-drag-handle" cdkDragHandle>
+                  ⋮⋮
+                </div>
+
+                <ng-container [ngSwitch]="metrica">
+                  <!-- Card de Faturamento -->
+                  <div *ngSwitchCase="'faturamento'" class="metric-card-content faturamento">
+                    <div class="card-icon">💰</div>
+                    <div class="card-details">
+                      <h3 class="card-label">Faturamento Total</h3>
+                      <p class="card-value">{{ formatarMoeda(dashboardData.faturamentoTotal) }}</p>
+                    </div>
+                  </div>
+
+                  <!-- Card de Total de Vendas -->
+                  <div *ngSwitchCase="'vendas'" class="metric-card-content vendas">
+                    <div class="card-icon">🛒</div>
+                    <div class="card-details">
+                      <h3 class="card-label">Total de Vendas</h3>
+                      <p class="card-value">{{ formatarNumero(dashboardData.totalVendas) }}</p>
+                    </div>
+                  </div>
+
+                  <!-- Card de Ticket Médio -->
+                  <div *ngSwitchCase="'ticket'" class="metric-card-content ticket">
+                    <div class="card-icon">🎯</div>
+                    <div class="card-details">
+                      <h3 class="card-label">Ticket Médio</h3>
+                      <p class="card-value">{{ formatarMoeda(dashboardData.ticketMedio) }}</p>
+                    </div>
+                  </div>
+
+                  <!-- Card de Crescimento -->
+                  <div *ngSwitchCase="'crescimento'" class="metric-card-content crescimento"
+                    [ngClass]="getClasseCrescimento()">
+                    <div class="card-icon">{{ getIconeCrescimento() }}</div>
+                    <div class="card-details">
+                      <h3 class="card-label">Crescimento</h3>
+                      <p class="card-value">
+                        {{ dashboardData.crescimentoPercentual >= 0 ? '+' : '' }}{{
+                        dashboardData.crescimentoPercentual.toFixed(2) }}%
+                      </p>
+                      <p class="card-subtitle">vs período anterior</p>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+
+          <!-- SEÇÃO: GRÁFICOS EM GRID -->
+          <div *ngSwitchCase="'chartsGrid'" class="section-content">
+            <div class="section-header">
+              <h2>📈 Análises Visuais</h2>
+              <div class="section-actions">
+                <div *ngIf="modoEdicao" class="drag-handle" cdkDragHandle>
+                  ⋮⋮
+                </div>
+                <button *ngIf="modoEdicao" class="btn-remove-section" (click)="removerSecao('chartsGrid')">
+                  🗑️
+                </button>
+              </div>
+            </div>
+
+            <!-- Grid de gráficos arrastáveis -->
+            <div class="charts-grid" cdkDropList [cdkDropListData]="ordemGraficos"
+              (cdkDropListDropped)="reordenarGraficos($event)">
+
+              <div *ngFor="let grafico of ordemGraficos" [cdkDragData]="grafico" cdkDrag [cdkDragDisabled]="!modoEdicao"
+                class="chart-item">
+
+                <div *ngIf="modoEdicao" class="chart-actions">
+                  <div class="chart-drag-handle" cdkDragHandle>
+                    ⋮⋮
+                  </div>
+                </div>
+
+                <ng-container [ngSwitch]="grafico">
+                  <!-- Gráfico de Pizza -->
+                  <app-sales-by-channel-chart *ngSwitchCase="'pizza'" [data]="dashboardData.vendasPorCanal">
+                  </app-sales-by-channel-chart>
+
+                  <!-- Gráfico de Barras -->
+                  <app-sales-by-hour-chart *ngSwitchCase="'barras'" [data]="dashboardData.vendasPorHora">
+                  </app-sales-by-hour-chart>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+
+          <!-- SEÇÃO: GRÁFICO DE LINHA (FULL WIDTH) -->
+          <div *ngSwitchCase="'timeline'" class="section-content">
+            <div class="section-header">
+              <h2>📈 Evolução Temporal</h2>
+              <div class="section-actions">
+                <div *ngIf="modoEdicao" class="drag-handle" cdkDragHandle>
+                  ⋮⋮
+                </div>
+                <button *ngIf="modoEdicao" class="btn-remove-section" (click)="removerSecao('timeline')">
+                  🗑️
+                </button>
+              </div>
+            </div>
+            <app-sales-timeline-chart [data]="dashboardData.vendasPorDia">
+            </app-sales-timeline-chart>
+          </div>
+
+          <!-- SEÇÃO: TABELAS DE RANKING -->
+          <div *ngSwitchCase="'tables'" class="section-content">
+            <div class="section-header">
+              <h2>🏆 Rankings</h2>
+              <div class="section-actions">
+                <div *ngIf="modoEdicao" class="drag-handle" cdkDragHandle>
+                  ⋮⋮
+                </div>
+                <button *ngIf="modoEdicao" class="btn-remove-section" (click)="removerSecao('tables')">
+                  🗑️
+                </button>
+              </div>
+            </div>
+            <app-top-tables [topProdutos]="dashboardData.topProdutos" [topLojas]="dashboardData.topLojas">
+            </app-top-tables>
+          </div>
+
+        </ng-container>
+      </section>
+
+      <!-- Botão para adicionar seções (modo edição) -->
+      <div *ngIf="modoEdicao" class="add-section-placeholder">
+        <button class="btn-add-section" (click)="mostrarModalSecoes()">
+          + Adicionar Seção
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Seção de debug (sempre no final) -->
+    <section class="debug-section">
+      <details>
+        <summary>🐛 Debug: Ver dados da API</summary>
+        <pre>{{ dashboardData | json }}</pre>
+      </details>
+    </section>
+
+  </div>
+
+  <!-- Modal para exportar PDF -->
+  <app-export-pdf-modal></app-export-pdf-modal>
+
+  <!-- Modal para adicionar seções -->
+  <div *ngIf="mostrarModalAdicionarSecao" class="modal-overlay" (click)="fecharModalSecoes()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>🥑 Adicionar Seção ao AvocaDash</h2>
+        <button class="btn-close" (click)="fecharModalSecoes()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="secoes-disponiveis">
+          <button *ngFor="let secao of secoesDisponiveis" class="btn-secao-option" (click)="adicionarSecao(secao.id)"
+            [disabled]="ordemSecoes.includes(secao.id)">
+            <span class="secao-icon">{{ secao.icon }}</span>
+            <span class="secao-title">{{ secao.nome }}</span>
+            <span class="secao-desc">{{ secao.descricao }}</span>
+            <span *ngIf="ordemSecoes.includes(secao.id)" class="secao-adicionada">✓ Adicionada</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,17 @@
+<!-- Container do gráfico de evolução temporal -->
+<div class="chart-container">
+
+    <h2 class="chart-title">📈 Evolução das Vendas</h2>
+
+    <!-- Mostra o gráfico se tiver dados -->
+    <div class="chart-wrapper" *ngIf="data && data.length > 0">
+        <canvas baseChart [data]="chartData" [options]="chartOptions" type="line">
+        </canvas>
+    </div>
+
+    <!-- Mensagem quando não há dados -->
+    <div class="no-data" *ngIf="!data || data.length === 0">
+        <p>📭 Nenhum dado disponível</p>
+    </div>
+
+</div>
