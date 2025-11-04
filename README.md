@@ -270,18 +270,6 @@ Este projeto foi desenvolvido para um desafio técnico, mas sugestões são bem-
 
 ---
 
-## 📝 Decisões Arquiteturais
-
-Para entender as escolhas técnicas, consulte: [DECISOES_ARQUITETURAIS.md](DECISOES_ARQUITETURAIS.md)
-
----
-
-## 📜 Changelog
-
-Veja [CHANGELOG.md](CHANGELOG.md) para histórico de mudanças.
-
----
-
 ## 📄 Licença
 
 Este projeto está sob a licença MIT. Veja [LICENSE](LICENSE) para mais detalhes.
