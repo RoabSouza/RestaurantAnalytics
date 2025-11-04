@@ -235,7 +235,7 @@ RestaurantAnalytics/
 ## 🎨 Screenshots
 
 ### Dashboard Light Mode
-<img width="120" height="384" alt="Image" src="https://github.com/user-attachments/assets/523c8514-4e96-437d-bd78-5037c0fca204" />
+<img width="220" height="484" alt="Image" src="https://github.com/user-attachments/assets/523c8514-4e96-437d-bd78-5037c0fca204" />
 
 ### Dashboard Dark Mode
 ![Dashboard Dark](screenshots/dashboard-dark.png)
