@@ -238,7 +238,7 @@ RestaurantAnalytics/
 <img width="220" height="484" alt="Image" src="https://github.com/user-attachments/assets/523c8514-4e96-437d-bd78-5037c0fca204" />
 
 ### Dashboard Dark Mode
-![Dashboard Dark](screenshots/dashboard-dark.png)
+<img width="220" height="484" alt="Image" src="https://github.com/user-attachments/assets/044662b9-7625-4eab-8f75-08c541e65810" />
 
 ### Gráficos Interativos
 ![Gráficos](screenshots/graficos.png)
