@@ -28,7 +28,7 @@ python generate_data.py --db-url "postgresql://postgres:qwerty@localhost:5432/da
 ```
 
 ### 3. Pronpts
-**
+
 ======================================================================
 God Level Coder Challenge - Data Generator
 ======================================================================
@@ -41,7 +41,6 @@ Generating 50 stores...
 Generating 500 products and 200 items...
 ✓ 498 products, 28 items, 4 option groups
 Generating 10000 customers...
-**
 
  Vai retornar os seguintes pronpts, apos isso é só esperar concluir
  Vai demorar um pouco por conta da densidades de dados...
