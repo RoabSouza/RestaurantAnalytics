@@ -18,7 +18,7 @@
 
 ## 📋 Sobre o Projeto
 
-Sistema desenvolvido para o **God Level Coder Challenge** da Arcca, que permite donos de restaurantes analisarem e visualizarem dados de vendas de forma intuitiva e profissional.
+Sistema desenvolvido para o **God Level Coder Challenge** da arcca, que permite donos de restaurantes analisarem e visualizarem dados de vendas de forma intuitiva e profissional.
 
 O sistema processa **500.000 vendas** de **50 lojas** em **6 meses**, oferecendo insights através de gráficos interativos, filtros personalizados e relatórios em PDF.
 
@@ -36,6 +36,10 @@ Donos de restaurantes gerenciam operações complexas através de múltiplos can
 - ✅ **Métricas principais**: Faturamento total, total de vendas, ticket médio
 - ✅ **Crescimento percentual** comparado com período anterior
 - ✅ **Atualização em tempo real** dos dados
+
+### 📊 Análise Comparativa
+- ✅ **A analise comparativa** analisa os dados de um intervalo de tempo e retorna ganhos e pedas dentro deste meio tempo 
+
 
 ### 📈 Gráficos Interativos
 - ✅ **Vendas por canal** (gráfico de pizza) - iFood, Presencial, Rappi, etc.
@@ -70,19 +74,23 @@ Donos de restaurantes gerenciam operações complexas através de múltiplos can
 - ✅ **Gráficos responsivos** que se ajustam ao tamanho da tela
 - ✅ **Navegação otimizada** para dispositivos móveis
 
+### ✏️ Personalizar
+- ✅ **O Personaliza** permite que o usuario consiga excluir e adicionar e muda-los de lugar, podendo assim customizar o seu dashboard do jeito que achar mais confortavel.
+
+
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
 ### Backend
-| Tecnologia | Versão | Uso |
-|------------|--------|-----|
-| Java | 17 | Linguagem principal |
-| Spring Boot | 3.2.x | Framework backend |
-| Spring Data JPA | 3.2.x | ORM e queries |
-| PostgreSQL | 16 | Banco de dados |
-| iText | 5.5.13 | Geração de PDF |
-| Maven | 3.9+ | Gerenciador de dependências |
+| Tecnologia | Versão | Uso                 |
+|------------|--------|-----                |
+| Java       | 17     | Linguagem principal |
+| Spring Boot| 3.2.x  | Framework backend   |
+| Spring Data  JPA| 3.2.x  | ORM e queries       |
+| PostgreSQL | 16     | Banco de dados      |
+| iText      | 5.5.13 | Geração de PDF      |
+| Maven | 3.9+ | Gerenciador de dependências|
 
 ### Frontend
 | Tecnologia | Versão | Uso |
@@ -152,7 +160,7 @@ cd restaurant-analytics-challenge/backend
 
 # Configurar application.properties
 # Edite: src/main/resources/application.properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/restaurant_db
+spring.datasource.url=jdbc:postgresql://localhost:5432/database_schema
 spring.datasource.username=postgres
 spring.datasource.password=sua_senha
 
@@ -211,61 +219,15 @@ curl "http://localhost:8080/api/dashboard/export/pdf" -o relatorio.pdf
 
 ## 📁 Estrutura do Projeto
 ```
-restaurant-analytics-challenge/
-│
-├── backend/                        # Spring Boot Application
-│   ├── src/main/java/
-│   │   └── com/restaurant/analytics/
-│   │       ├── model/             # Entidades JPA
-│   │       │   ├── Sale.java
-│   │       │   ├── Store.java
-│   │       │   ├── Channel.java
-│   │       │   ├── Product.java
-│   │       │   └── ...
-│   │       ├── dto/               # Data Transfer Objects
-│   │       │   ├── DashboardResumoDTO.java
-│   │       │   ├── VendaTotalDTO.java
-│   │       │   └── ...
-│   │       ├── repository/        # Queries SQL
-│   │       │   └── SaleRepository.java
-│   │       ├── service/           # Lógica de negócio
-│   │       │   ├── DashboardService.java
-│   │       │   └── PdfService.java
-│   │       ├── controller/        # Endpoints REST
-│   │       │   └── DashboardController.java
-│   │       └── exception/         # Tratamento de erros
-│   │           ├── GlobalExceptionHandler.java
-│   │           └── ...
-│   └── src/main/resources/
-│       └── application.properties
-│
-├── frontend/                       # Angular Application
-│   ├── src/app/
-│   │   ├── models/                # Interfaces TypeScript
-│   │   │   ├── dashboard-resumo.model.ts
-│   │   │   ├── produto-top.model.ts
-│   │   │   └── ...
-│   │   ├── services/              # HTTP Services
-│   │   │   ├── api.service.ts
-│   │   │   ├── dashboard.service.ts
-│   │   │   └── theme.service.ts
-│   │   └── components/            # Componentes Angular
-│   │       ├── dashboard/
-│   │       ├── metrics-cards/
-│   │       ├── sales-by-channel-chart/
-│   │       ├── sales-by-hour-chart/
-│   │       ├── sales-timeline-chart/
-│   │       ├── date-filter/
-│   │       ├── top-tables/
-│   │       ├── theme-toggle/
-│   │       └── export-pdf-modal/
-│   └── src/styles.scss            # Estilos globais
-│
-├── screenshots/                    # Prints da aplicação
-├── README.md
-├── DECISOES_ARQUITETURAIS.md
-├── LICENSE
-└── CHANGELOG.md
+RestaurantAnalytics/
+├── 📁 backend/                 # Spring Boot
+├── 📁 frontend/                # Angular
+├── 📁 database/                # PostgreSQL + Docker
+├── 📄 README.md               #   ✅
+├── 📄 DECISOES_ARQUITETURAIS.md # ✅
+├── 📄 CHANGELOG.md            #   ✅
+├── 📄 LICENSE                 #   ✅
+└── 📄 .gitignore              #   ✅
 ```
 
 ---
@@ -306,59 +268,10 @@ restaurant-analytics-challenge/
 - ✅ Lazy loading de componentes
 - ✅ CSS variables para dark mode
 
----
-
-## 🧪 Testes
-
-### Backend
-```bash
-./mvnw test
-```
-
-### Frontend
-```bash
-ng test
-```
-
-### E2E
-```bash
-ng e2e
-```
-
----
-
-## 🚀 Deploy
-
-### Backend (Railway)
-```bash
-# 1. Criar conta no Railway
-# 2. Criar projeto PostgreSQL
-# 3. Criar projeto Spring Boot
-# 4. Conectar ao GitHub
-# 5. Configurar variáveis de ambiente
-```
-
-### Frontend (Vercel)
-```bash
-# 1. Instalar Vercel CLI
-npm i -g vercel
-
-# 2. Deploy
-cd frontend
-vercel --prod
-```
-
----
 
 ## 🤝 Contribuindo
 
 Este projeto foi desenvolvido para um desafio técnico, mas sugestões são bem-vindas!
-
-1. Fork o projeto
-2. Crie uma branch (`git checkout -b feature/NovaFuncionalidade`)
-3. Commit suas mudanças (`git commit -m 'Adiciona nova funcionalidade'`)
-4. Push para a branch (`git push origin feature/NovaFuncionalidade`)
-5. Abra um Pull Request
 
 ---
 
@@ -382,46 +295,26 @@ Este projeto está sob a licença MIT. Veja [LICENSE](LICENSE) para mais detalhe
 
 ## 👨‍💻 Autor
 
-**[Seu Nome]**
+**[Roab Souza Brito]**
 
-- 💼 LinkedIn: [linkedin.com/in/seu-perfil](https://linkedin.com/in/seu-perfil)
-- 🐱 GitHub: [@seu-usuario](https://github.com/seu-usuario)
-- 📧 Email: seu@email.com
+- 💼 LinkedIn: [[linkedin.com/in/seu-perfil](https://www.linkedin.com/in/roab-brito/)]([https://linkedin.com/in/seu-perfil](https://www.linkedin.com/in/roab-brito/))
+- 🐱 GitHub: [@RoabSouza]([https://github.com/seu-usuario](https://github.com/RoabSouza))
+- 📧 Email: roabsouza144@gmail.com
 
 ---
 
 ## 🙏 Agradecimentos
 
-- **Arcca** pela oportunidade do desafio
-- **Spring Boot Community** pela documentação excelente
-- **Angular Team** pelo framework robusto
-- **Chart.js Contributors** pelos gráficos incríveis
-- **iText** pela biblioteca de PDF
+- **DEUS** pois sem sua graça eu não conseguiria nem começar.
+- **arcca** pela oportunidade do desafio.
 
 ---
 
-## 📞 Suporte
 
-Encontrou um bug ou tem uma sugestão?
 
-- 📧 Email: seu@email.com
-- 💬 Discord: Arcca Community
-- 🐛 Issues: [GitHub Issues](https://github.com/seu-usuario/restaurant-analytics-challenge/issues)
 
----
-
-<div align="center">
-
-**⭐ Se este projeto te ajudou, deixe uma estrela!**
 
 Feito com ❤️ e ☕ para o God Level Coder Challenge
-
-</div>
-```
-
-**✅ Salve como `README.md`**
-
----
 
 ## 📄 Arquivo 2: `LICENSE`
 
