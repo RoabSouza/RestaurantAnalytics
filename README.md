@@ -10,8 +10,6 @@
 
 **Dashboard completo de análise de vendas para restaurantes com múltiplos canais**
 
-[Demo](#) · [Documentação](#decisões-arquiteturais) · [Reportar Bug](#)
-
 </div>
 
 ---
