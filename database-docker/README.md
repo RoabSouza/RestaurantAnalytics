@@ -6,12 +6,15 @@
 - 
 ## 🚀 Como executar o projeto
 
+## Navegar até a pagina database-docker
+```bash
+cd analytics/database-docker
+```
 ### 1. Subir os containers Docker
 ```bash
 docker-compose up -d
 ```
 ### 2. Popular o banco com dados de teste
-
 **Passos:**
 ```bash
 # Instalar dependências
@@ -24,7 +27,28 @@ cd analytics/database-docker
 python generate_data.py --db-url "postgresql://postgres:qwerty@localhost:5432/database_schema"
 ```
 
-### 3. Acessar a aplicação
+### 3. Pronpts
+**
+======================================================================
+God Level Coder Challenge - Data Generator
+======================================================================
+Generating 6 months of restaurant operational data...
+
+Setting up base data...
+✓ Base data: 3 sub-brands, 6 channels
+Generating 50 stores...
+✓ 50 stores created
+Generating 500 products and 200 items...
+✓ 498 products, 28 items, 4 option groups
+Generating 10000 customers...
+**
+
+ Vai retornar os seguintes pronpts, apos isso é só esperar concluir
+ Vai demorar um pouco por conta da densidades de dados...
+
+
+
+### 4. Acessar a aplicação
 - **Backend Spring**: http://localhost:8080 (ou a porta configurada)
 - **Adminer** (gerenciador de BD): http://localhost:9090
   - Sistema: PostgreSQL
