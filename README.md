@@ -241,13 +241,10 @@ RestaurantAnalytics/
 <img width="220" height="484" alt="Image" src="https://github.com/user-attachments/assets/044662b9-7625-4eab-8f75-08c541e65810" />
 
 ### Gráficos Interativos
-![Gráficos](screenshots/graficos.png)
+<img width="220" height="484" alt="Image" src="https://github.com/user-attachments/assets/47a9d236-237a-458a-9c7d-2646700c7b16" />
 
 ### Export PDF
-![Export PDF](screenshots/export-pdf.png)
-
-### Versão Mobile
-![Mobile](screenshots/mobile.png)
+<img width="220" height="484" alt="Image" src="https://github.com/user-attachments/assets/75dc2ca4-355b-4e20-95e8-ca298704730e" />
 
 ---
 
