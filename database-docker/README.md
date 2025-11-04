@@ -14,7 +14,7 @@ cd analytics/database-docker
 ```bash
 docker-compose up -d
 ```
-### 2. Popular o banco com dados de teste
+### 2. 💉 Popular o banco com dados de teste
 **Passos:**
 ```bash
 # Instalar dependências
@@ -27,7 +27,7 @@ cd analytics/database-docker
 python generate_data.py --db-url "postgresql://postgres:qwerty@localhost:5432/database_schema"
 ```
 
-### 3. Pronpts
+### 3. 👨‍💻Pronpts
 ```bash
 ======================================================================
 God Level Coder Challenge - Data Generator
@@ -47,9 +47,9 @@ Vai demorar um pouco por conta da densidades de dados...
 ```
 
 
-### 4. Acessar a aplicação
-- **Backend Spring**: http://localhost:8080 (ou a porta configurada)
-- **Adminer** (gerenciador de BD): http://localhost:9090
+### 4. 🌐 Acessar a aplicação
+- **🍃 Backend Spring**: http://localhost:8080 (ou a porta configurada)
+- **🗄️ Adminer** (gerenciador de BD): http://localhost:9090
   - Sistema: PostgreSQL
   - Servidor: postgres
   - Usuário: postgres
@@ -57,6 +57,5 @@ Vai demorar um pouco por conta da densidades de dados...
   - Base de dados: database_schema
 
 ## 📦 Containers Docker
-
-- `restaurant-postgres`: PostgreSQL 16 (porta 5432)
-- `adminer-web`: Adminer (porta 9090)
+- `🐘 restaurant-postgres`: PostgreSQL 16 (porta 5432)
+- `🗂️ adminer-web`: Adminer (porta 9090)
