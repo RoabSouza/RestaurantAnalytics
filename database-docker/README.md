@@ -10,7 +10,7 @@
 ```bash
 cd analytics/database-docker
 ```
-### 1. Subir os containers Docker
+### 1. 🐳 Subir os containers Docker
 ```bash
 docker-compose up -d
 ```
