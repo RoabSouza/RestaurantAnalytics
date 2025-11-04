@@ -1,4 +1,4 @@
-# 🍕 Restaurant Analytics Dashboard
+# 🥑 Restaurant Analytics Dashboard
 
 <div align="center">
 
