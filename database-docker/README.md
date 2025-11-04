@@ -3,7 +3,6 @@
 **Requisitos:**
 - Python 3.x instalado
 - pip
-- 
 ## 🚀 Como executar o projeto
 
 ## Navegar até a pagina database-docker
