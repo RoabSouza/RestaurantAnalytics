@@ -33,6 +33,38 @@ services:
       postgres:
         condition: service_healthy
 
+  # Data Generator - Popula o banco com dados
+  data-generator:
+    image: python:3.9-slim
+    container_name: data-generator
+    volumes:
+      - ./generate_data.py:/app/generate_data.py
+    working_dir: /app
+    environment:
+      - PYTHONIOENCODING=utf-8
+      - LANG=C.UTF-8
+    command: >
+      bash -c "
+      echo '🚀 Instalando dependências...' &&
+      pip install --no-cache-dir psycopg2-binary faker &&
+      echo '✅ Dependências instaladas!' &&
+      echo '📊 Gerando dados no banco...' &&
+      python generate_data.py 
+        --db-url 'postgresql://postgres:qwerty@postgres:5432/database_schema'
+        --stores 50
+        --products 500
+        --items 200
+        --customers 10000
+        --months 6 &&
+      echo '✅ Dados gerados com sucesso!' &&
+      echo '🎉 Processo concluído!'
+      "
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - app-network
+
 volumes:
   postgres_data:
 
