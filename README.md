@@ -289,7 +289,7 @@ Este projeto está sob a licença MIT. Veja [LICENSE](LICENSE) para mais detalhe
 ## 🙏 Agradecimentos
 
 - **DEUS** pois sem sua graça eu não conseguiria nem começar.
-- **arcca** pela oportunidade do desafio.
+- **nola** pela oportunidade do desafio.
 
 ---
 
